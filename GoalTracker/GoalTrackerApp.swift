@@ -1,17 +1,15 @@
-//
-//  GoalTrackerApp.swift
-//  GoalTracker
-//
-//  Created by Sahar Benjamin Amsterdam on 02/08/2025.
-//
-
 import SwiftUI
+import Firebase
 
 @main
 struct GoalTrackerApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
