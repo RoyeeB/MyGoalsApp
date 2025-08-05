@@ -72,7 +72,9 @@ struct GoalCardView: View {
                             .foregroundColor(.secondary)
 
                         Button {
-                            goalsVM.incrementAmount(goal: goal)
+                            if current < target {
+                                goalsVM.incrementAmount(goal: goal)
+                            }
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)

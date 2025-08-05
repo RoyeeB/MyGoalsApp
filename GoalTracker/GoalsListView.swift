@@ -55,42 +55,43 @@ struct GoalsListView: View {
                         .pickerStyle(.segmented)
                         .padding(.horizontal)
 
-                        if filteredGoals.isEmpty {
-                            VStack(spacing: 16) {
-                                Image(systemName: "target")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 80, height: 80)
-                                    .foregroundColor(.blue.opacity(0.8))
-                                    .padding(.top, 60)
+                        ScrollView(showsIndicators: false) {
+                            if filteredGoals.isEmpty {
+                                VStack(spacing: 16) {
+                                    Image(systemName: "target")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80, height: 80)
+                                        .foregroundColor(.blue.opacity(0.8))
+                                        .padding(.top, 60)
 
-                                Text("No goals yet")
-                                    .font(.title2.bold())
+                                    Text("No goals yet")
+                                        .font(.title2.bold())
 
-                                Text("Try adding one to get started 💪")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .multilineTextAlignment(.center)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                        } else {
-                            List {
-                                ForEach(filteredGoals) { goal in
-                                    GoalCardView(goal: goal, goalsVM: goalsVM)
-                                        .listRowBackground(Color.clear)
-                                        .swipeActions {
-                                            Button(role: .destructive) {
-                                                goalsVM.deleteGoal(goal: goal)
-                                            } label: {
-                                                Label("Delete", systemImage: "trash")
-                                            }
-                                        }
+                                    Text("Try adding one to get started 💪")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
                                 }
-                                .listRowSeparator(.hidden)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .multilineTextAlignment(.center)
+                                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                            } else {
+                                LazyVStack(spacing: 14) {
+                                    ForEach(filteredGoals) { goal in
+                                        GoalCardView(goal: goal, goalsVM: goalsVM)
+                                            .padding(.horizontal)
+                                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                                Button(role: .destructive) {
+                                                    goalsVM.deleteGoal(goal: goal)
+                                                } label: {
+                                                    Label("Delete", systemImage: "trash")
+                                                }
+                                            }
+                                    }
+                                }
+                                .padding(.bottom, 80)
                             }
-                            .listStyle(.plain)
-                            .padding(.bottom, 40)
                         }
                     } else {
                         ProgressView()
