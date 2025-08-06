@@ -81,13 +81,6 @@ struct GoalsListView: View {
                                         GoalCardView(goal: goal, goalsVM: goalsVM)
                                             .padding(.horizontal)
                                             .transition(.move(edge: .bottom).combined(with: .opacity))
-                                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                                Button(role: .destructive) {
-                                                    goalsVM.deleteGoal(goal: goal)
-                                                } label: {
-                                                    Label("Delete", systemImage: "trash")
-                                                }
-                                            }
                                     }
                                 }
                                 .padding(.bottom, 80)
