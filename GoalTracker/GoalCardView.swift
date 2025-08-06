@@ -46,6 +46,7 @@ struct GoalCardView: View {
                         .scaleEffect(animateCheckmark ? 1.2 : 1)
                         .animation(.spring(), value: animateCheckmark)
                 }
+                .buttonStyle(.plain) // ✅ חשוב מאוד
             }
 
             if goal.isQuantitative,
@@ -66,6 +67,7 @@ struct GoalCardView: View {
                                 .font(.title2)
                                 .foregroundColor(.gray)
                         }
+                        .buttonStyle(.plain) // ✅
 
                         Text("\(current) / \(target)")
                             .font(.subheadline)
@@ -80,6 +82,7 @@ struct GoalCardView: View {
                                 .font(.title2)
                                 .foregroundColor(.blue)
                         }
+                        .buttonStyle(.plain) // ✅
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top, 4)
