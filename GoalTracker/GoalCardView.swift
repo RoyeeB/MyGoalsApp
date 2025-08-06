@@ -67,7 +67,7 @@ struct GoalCardView: View {
                                 .font(.title2)
                                 .foregroundColor(.gray)
                         }
-                        .buttonStyle(.plain) // ✅
+                        .buttonStyle(.plain) 
 
                         Text("\(current) / \(target)")
                             .font(.subheadline)
