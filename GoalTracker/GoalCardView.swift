@@ -30,6 +30,15 @@ struct GoalCardView: View {
 
                 Spacer()
 
+                Button(action: {
+                    goalsVM.deleteGoal(goal: goal)
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.title3)
+                }
+                .buttonStyle(.plain)
+
                 Button {
                     goalsVM.toggleComplete(goal: goal)
                     withAnimation(.spring()) {
@@ -67,7 +76,7 @@ struct GoalCardView: View {
                                 .font(.title2)
                                 .foregroundColor(.gray)
                         }
-                        .buttonStyle(.plain) 
+                        .buttonStyle(.plain)
 
                         Text("\(current) / \(target)")
                             .font(.subheadline)
